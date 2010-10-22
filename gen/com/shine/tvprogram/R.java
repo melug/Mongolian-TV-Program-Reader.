@@ -13,13 +13,44 @@ public final class R {
     public static final class drawable {
         public static final int icon=0x7f020000;
     }
+    public static final class id {
+        public static final int channel_name=0x7f060000;
+        public static final int days=0x7f060003;
+        public static final int friday=0x7f060008;
+        public static final int monday=0x7f060004;
+        public static final int program_name=0x7f060002;
+        public static final int saturday=0x7f060009;
+        public static final int sunday=0x7f06000a;
+        public static final int thursday=0x7f060007;
+        public static final int time_to_air=0x7f060001;
+        public static final int tuesday=0x7f060005;
+        public static final int wednesday=0x7f060006;
+    }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int tv_channels=0x7f030001;
-        public static final int tv_item=0x7f030002;
+        public static final int about=0x7f030000;
+        public static final int main=0x7f030001;
+        public static final int tv_channels=0x7f030002;
+        public static final int tv_program=0x7f030003;
+    }
+    public static final class menu {
+        public static final int programs_menu=0x7f050000;
     }
     public static final class string {
+        public static final int aboutus=0x7f04000f;
+        public static final int aboutus_long=0x7f040005;
         public static final int app_name=0x7f040001;
+        public static final int days=0x7f04000d;
+        public static final int download=0x7f040002;
+        public static final int downloading_tvprogram=0x7f04000e;
+        public static final int friday=0x7f04000a;
         public static final int hello=0x7f040000;
+        public static final int monday=0x7f040006;
+        public static final int saturday=0x7f04000b;
+        public static final int sunday=0x7f04000c;
+        public static final int thursday=0x7f040009;
+        public static final int tomorrow=0x7f040003;
+        public static final int tuesday=0x7f040007;
+        public static final int wednesday=0x7f040008;
+        public static final int yesterday=0x7f040004;
     }
 }

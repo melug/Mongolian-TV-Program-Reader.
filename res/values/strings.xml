@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">ТВ Програм</string>
-    <string name="app_name">TV Program</string>
+    <string name="hello">Зурагтын мэдээ</string>
+    <string name="app_name">Зурагтын мэдээ</string>
+    <string name="download">Мэдээг шинэчлэх</string>
+    <string name="tomorrow">Маргааш</string>
+    <string name="yesterday">Өчигдөр</string>
+    <string name="aboutus_long">Зулаа</string>
+    <string name="monday">Даваа</string>
+    <string name="tuesday">Мягмар</string>
+    <string name="wednesday">Лхагва</string>
+    <string name="thursday">Пүрэв</string>
+    <string name="friday">Баасан</string>
+    <string name="saturday">Бямба</string>
+    <string name="sunday">Ням</string>
+    <string name="days">Өдрүүд</string>
+    <string name="downloading_tvprogram">Зурагтын мэдээ татаж байна.</string>
+    <string name="aboutus">Бид</string>
 </resources>
