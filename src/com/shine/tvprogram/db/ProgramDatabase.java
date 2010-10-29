@@ -1,16 +1,32 @@
 package com.shine.tvprogram.db;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.shine.tvprogram.DateHelper;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.MediaStore.Images.Media;
+
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 
 public class ProgramDatabase 
@@ -23,9 +39,13 @@ public class ProgramDatabase
     private final Context context; 
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
-    public ProgramDatabase(Context ctx)
+    private ContentResolver resolver;
+    String tag = "ProgramDatabase";
+    
+    public ProgramDatabase(Context ctx, ContentResolver resolver)
     {
         this.context = ctx;
+        this.resolver = resolver;
         DBHelper = new DatabaseHelper(context);
     }
     private static class DatabaseHelper extends SQLiteOpenHelper 
@@ -70,7 +90,7 @@ public class ProgramDatabase
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put("channel_name", name);
-        initialValues.put("img_url", name);
+        initialValues.put("img_url", img_url);
         return db.insert("channels", null, initialValues);
     }
     public boolean deleteChannel(long rowId) 
@@ -80,7 +100,7 @@ public class ProgramDatabase
     public Cursor getAllChannels() 
     {
         return db.query("channels", new String[] {
-        		"_id", "channel_name",}, null, null, null, null, null);
+        		"_id", "channel_name", "img_url",}, null, null, null, null, null);
     }
     public Cursor getChannel(long rowId) throws SQLException 
     {
@@ -109,6 +129,13 @@ public class ProgramDatabase
         }
         return mCursor;
     }
+    
+    public Cursor searchPrograms(String query) {
+    	Cursor cursor = db.query("programs", null, "program_name LIKE ?", new String[]{"%" + query + "%"}, 
+    			null, null, null);
+    	return cursor;
+    }
+    
     public long insertProgram(long channel_id, String time_to_air, int day, String program_name) 
     {
         ContentValues initialValues = new ContentValues();
@@ -124,6 +151,14 @@ public class ProgramDatabase
 		db.beginTransaction();
     	try {
     		// reset database:
+    		Cursor cur = getAllChannels();
+    		cur.moveToFirst();
+    		while(!cur.isAfterLast()) {
+    			String img_uri = cur.getString(cur.getColumnIndex("img_url"));
+    			resolver.delete(Uri.parse(img_uri), null, null);
+    			cur.moveToNext();
+    		}
+    		cur.close();
     		db.delete("channels", null, null);
     		db.delete("programs", null, null);
     		
@@ -139,22 +174,51 @@ public class ProgramDatabase
     				currentDay = Integer.parseInt(l.substring(1));
     			} else {
     				channelRow = l.split("#");
-    				currentChannelId = insertChannel(channelRow[0], channelRow[1]);
-    				if(handler != null) {
-    					Message msg = handler.obtainMessage();
-    					Bundle b = new Bundle();
-    					b.putString("status", "saving");
-    					b.putString("channel", channelRow[0]);
-    					msg.setData(b);
-    					handler.sendMessage(msg);
-    				}
+    				Message msg = handler.obtainMessage();
+    				Bundle b = new Bundle();
+    				b.putString("status", "saving");
+    				b.putString("channel", channelRow[0]);
+    				msg.setData(b);
+    				handler.sendMessage(msg);
+    				String contentUri = saveImage(channelRow[1]);
+    				currentChannelId = insertChannel(channelRow[0], contentUri);
     			}
     		}
     		db.setTransactionSuccessful();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(tag, e.toString());
 		} finally {
 			db.endTransaction();
 		}
+    }
+    
+    public String saveImage(String url) {
+    	DefaultHttpClient client = new DefaultHttpClient();
+    	try {
+			HttpResponse response = client.execute(new HttpGet(url));
+			HttpEntity entity = response.getEntity();
+			InputStream is = entity.getContent();
+			
+			Bitmap bm = BitmapFactory.decodeStream(is);
+			ContentValues values = new ContentValues(2);
+			values.put(Media.DISPLAY_NAME, url);
+			values.put(Media.MIME_TYPE, response.getHeaders("Content-Type")[0].getValue());
+			Uri uri = resolver.insert(Media.EXTERNAL_CONTENT_URI, values);
+			
+			OutputStream outStream = resolver.openOutputStream(uri);
+			bm.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+			outStream.close();
+
+			return uri.toString();
+		} catch (ClientProtocolException e) {
+			Log.e(tag, e.toString());
+		} catch (IOException e) {
+			Log.e(tag, e.toString());
+		} catch (Exception e) {
+			Log.e(tag, e.toString());
+		}
+		String a = "22";
+		Log.i(tag, a);
+    	return null;
     }
 }

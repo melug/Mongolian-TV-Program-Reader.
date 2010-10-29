@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:paddingTop="10px"
+  android:paddingBottom="10px"
+  android:orientation="horizontal">
+  <TextView android:id="@+id/entry_time"
+  android:layout_marginLeft="20px"
+  android:layout_height="fill_parent"
+  android:layout_width="wrap_content"
+  android:paddingRight="10px"/>
+  <TextView android:id="@+id/entry_program"
+  android:layout_height="fill_parent"
+  android:layout_width="fill_parent"
+  android:paddingLeft="10px"
+  android:paddingRight="10px"/>
+</LinearLayout>

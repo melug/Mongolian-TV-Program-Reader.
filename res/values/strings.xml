@@ -16,4 +16,6 @@
     <string name="days">Өдрүүд</string>
     <string name="downloading_tvprogram">Зурагтын мэдээ татаж байна.</string>
     <string name="aboutus">Бид</string>
+    <string name="search_hint">Хөтөлбөрийн нэр</string>
+    <string name="search">Хайх</string>
 </resources>

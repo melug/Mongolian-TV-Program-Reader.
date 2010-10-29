@@ -14,43 +14,55 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int channel_name=0x7f060000;
-        public static final int days=0x7f060003;
-        public static final int friday=0x7f060008;
-        public static final int monday=0x7f060004;
-        public static final int program_name=0x7f060002;
-        public static final int saturday=0x7f060009;
-        public static final int sunday=0x7f06000a;
-        public static final int thursday=0x7f060007;
-        public static final int time_to_air=0x7f060001;
-        public static final int tuesday=0x7f060005;
-        public static final int wednesday=0x7f060006;
+        public static final int channel_icon=0x7f070000;
+        public static final int channel_name=0x7f070001;
+        public static final int days=0x7f070007;
+        public static final int download_program=0x7f07000f;
+        public static final int entry_program=0x7f070005;
+        public static final int entry_time=0x7f070004;
+        public static final int expandable_view=0x7f070006;
+        public static final int friday=0x7f07000c;
+        public static final int monday=0x7f070008;
+        public static final int program_name=0x7f070003;
+        public static final int saturday=0x7f07000d;
+        public static final int search_program=0x7f070010;
+        public static final int sunday=0x7f07000e;
+        public static final int thursday=0x7f07000b;
+        public static final int time=0x7f070002;
+        public static final int tuesday=0x7f070009;
+        public static final int wednesday=0x7f07000a;
     }
     public static final class layout {
         public static final int about=0x7f030000;
-        public static final int main=0x7f030001;
-        public static final int tv_channels=0x7f030002;
-        public static final int tv_program=0x7f030003;
+        public static final int channels_for_expandable=0x7f030001;
+        public static final int programs_for_expandable=0x7f030002;
+        public static final int search_entry=0x7f030003;
+        public static final int tv_info=0x7f030004;
     }
     public static final class menu {
-        public static final int programs_menu=0x7f050000;
+        public static final int programs_menu=0x7f060000;
     }
     public static final class string {
-        public static final int aboutus=0x7f04000f;
-        public static final int aboutus_long=0x7f040005;
-        public static final int app_name=0x7f040001;
-        public static final int days=0x7f04000d;
-        public static final int download=0x7f040002;
-        public static final int downloading_tvprogram=0x7f04000e;
-        public static final int friday=0x7f04000a;
-        public static final int hello=0x7f040000;
-        public static final int monday=0x7f040006;
-        public static final int saturday=0x7f04000b;
-        public static final int sunday=0x7f04000c;
-        public static final int thursday=0x7f040009;
-        public static final int tomorrow=0x7f040003;
-        public static final int tuesday=0x7f040007;
-        public static final int wednesday=0x7f040008;
-        public static final int yesterday=0x7f040004;
+        public static final int aboutus=0x7f05000f;
+        public static final int aboutus_long=0x7f050005;
+        public static final int app_name=0x7f050001;
+        public static final int days=0x7f05000d;
+        public static final int download=0x7f050002;
+        public static final int downloading_tvprogram=0x7f05000e;
+        public static final int friday=0x7f05000a;
+        public static final int hello=0x7f050000;
+        public static final int monday=0x7f050006;
+        public static final int saturday=0x7f05000b;
+        public static final int search=0x7f050011;
+        public static final int search_hint=0x7f050010;
+        public static final int sunday=0x7f05000c;
+        public static final int thursday=0x7f050009;
+        public static final int tomorrow=0x7f050003;
+        public static final int tuesday=0x7f050007;
+        public static final int wednesday=0x7f050008;
+        public static final int yesterday=0x7f050004;
+    }
+    public static final class xml {
+        public static final int searchable=0x7f040000;
     }
 }
