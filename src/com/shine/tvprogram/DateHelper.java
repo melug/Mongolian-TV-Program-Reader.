@@ -3,8 +3,8 @@ package com.shine.tvprogram;
 import java.util.Calendar;
 
 public class DateHelper {
-	String day_localization[] = new String[]{
-			"Даваа","Мягмар","Лхагва","Пүрэв","Даваа","Даваа","Даваа",
+	static String dayLocalization[] = new String[]{
+			"Даваа","Мягмар","Лхагва","Пүрэв","Баасан","Бямба","Ням",
 	};
 	public static int getTodayOfWeek() {
 		Calendar this_moment = Calendar.getInstance();
@@ -19,5 +19,8 @@ public class DateHelper {
     		case Calendar.SUNDAY: 		{ exact_day = 7; break; }
     	}
     	return exact_day;
+	}
+	public static String getDayName(int day) {
+		return dayLocalization[day - 1];
 	}
 }

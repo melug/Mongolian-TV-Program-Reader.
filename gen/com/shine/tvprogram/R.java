@@ -16,21 +16,23 @@ public final class R {
     public static final class id {
         public static final int channel_icon=0x7f070000;
         public static final int channel_name=0x7f070001;
-        public static final int days=0x7f070007;
-        public static final int download_program=0x7f07000f;
+        public static final int days=0x7f070009;
+        public static final int download_program=0x7f070011;
+        public static final int entry_channel=0x7f070007;
+        public static final int entry_day=0x7f070006;
         public static final int entry_program=0x7f070005;
         public static final int entry_time=0x7f070004;
-        public static final int expandable_view=0x7f070006;
-        public static final int friday=0x7f07000c;
-        public static final int monday=0x7f070008;
+        public static final int expandable_view=0x7f070008;
+        public static final int friday=0x7f07000e;
+        public static final int monday=0x7f07000a;
         public static final int program_name=0x7f070003;
-        public static final int saturday=0x7f07000d;
-        public static final int search_program=0x7f070010;
-        public static final int sunday=0x7f07000e;
-        public static final int thursday=0x7f07000b;
+        public static final int saturday=0x7f07000f;
+        public static final int search_program=0x7f070012;
+        public static final int sunday=0x7f070010;
+        public static final int thursday=0x7f07000d;
         public static final int time=0x7f070002;
-        public static final int tuesday=0x7f070009;
-        public static final int wednesday=0x7f07000a;
+        public static final int tuesday=0x7f07000b;
+        public static final int wednesday=0x7f07000c;
     }
     public static final class layout {
         public static final int about=0x7f030000;

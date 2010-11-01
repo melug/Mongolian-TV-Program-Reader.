@@ -20,11 +20,17 @@ import android.widget.SimpleCursorTreeAdapter;
 import android.widget.Toast;
 import android.util.Log;
 
+//Үндсэн класс, програм эхлэх үед ачааллана.
 public class TvInfo extends Activity {
+	//Өгөгдлийг үзэгдэлтэй холбогч адаптер класс
 	SimpleCursorTreeAdapter programListCursorAdapter;
+	//Дэлгэрдэг үзэгдэл
 	ExpandableListView expandableView;
+	//Интернетээс өгөгдөл татагч процесс
 	ProgramDownloader downloaderTask;
+	//Өгөгдлийн сантай харьцах үйлдлийг хялбарчилсан класс
 	ProgramDatabase db;
+	//Өгөгдлийн сангаас авсан өгөгдлийг заагч
 	Cursor allChannelsCursor;
 	final String tag = "TvInfo";
 	@Override
@@ -65,8 +71,8 @@ public class TvInfo extends Activity {
 				}
 			};
 			expandableView.setAdapter(programListCursorAdapter);
-			//allChannels.close();
 		} catch(Exception e) {
+			alert("Өгөгдөл авах үед алдаа гарлаа!");
 			e.printStackTrace();
 			Log.e(tag, e.toString());
 		}
@@ -152,6 +158,7 @@ public class TvInfo extends Activity {
 		return true;
 	}
 
+	//Арын орчинд ажиллаж буй процессоос сигнал хүлээн авагч
 	final Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			Bundle b = msg.getData();

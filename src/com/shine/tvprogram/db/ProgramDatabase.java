@@ -31,6 +31,7 @@ import android.util.Log;
 
 public class ProgramDatabase 
 {
+	//Энэ классыг статик байх хэрэгтэй юм шиг санагдаад байна.
     private static final String TAG = "DBAdapter";
     private static final String DATABASE_NAME = "tvprogram";
     private static final int DATABASE_VERSION = 1;
@@ -131,8 +132,13 @@ public class ProgramDatabase
     }
     
     public Cursor searchPrograms(String query) {
-    	Cursor cursor = db.query("programs", null, "program_name LIKE ?", new String[]{"%" + query + "%"}, 
-    			null, null, null);
+    	return searchPrograms(query, 60);
+    }
+    
+    public Cursor searchPrograms(String query, Integer limit) {
+    	Integer today = DateHelper.getTodayOfWeek();
+    	Cursor cursor = db.query("programs", null, "program_name LIKE ? AND day >= ?", 
+    			new String[]{"%" + query + "%", today.toString()}, null, null, "day, time_to_air, channel_id", limit.toString());
     	return cursor;
     }
     
@@ -217,8 +223,6 @@ public class ProgramDatabase
 		} catch (Exception e) {
 			Log.e(tag, e.toString());
 		}
-		String a = "22";
-		Log.i(tag, a);
     	return null;
     }
 }
