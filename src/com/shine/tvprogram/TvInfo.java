@@ -18,7 +18,6 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.SimpleCursorTreeAdapter;
 import android.widget.Toast;
-import android.util.Log;
 
 //Үндсэн класс, програм эхлэх үед ачааллана.
 public class TvInfo extends Activity {
@@ -73,8 +72,6 @@ public class TvInfo extends Activity {
 			expandableView.setAdapter(programListCursorAdapter);
 		} catch(Exception e) {
 			alert("Өгөгдөл авах үед алдаа гарлаа!");
-			e.printStackTrace();
-			Log.e(tag, e.toString());
 		}
 	}
 
@@ -176,7 +173,7 @@ public class TvInfo extends Activity {
 				downloadProgress.setMessage("Татаж байна. " + progress + "кб");
 			} else if("saving".equals(status)) {
 				String channel = b.getString("channel");
-				downloadProgress.setMessage(channel + "-ийг татаж байна");
+				downloadProgress.setMessage(channel + "-ийг хадгалж байна");
 			} else if("saved".equals(status)) {
 				dismissDialog(DOWNLOAD_PROGRESS_DIALOG);
 				updatePrograms();

@@ -24,11 +24,7 @@ public class SearchProgram extends ListActivity {
 	    
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 	      String query = intent.getStringExtra(SearchManager.QUERY);
-	      try {
-	    	  doSearch(query);
-	      } catch(Exception e) {
-	    	  e.printStackTrace();
-	      }
+	      doSearch(query);
 	    }
 	}
 	
@@ -69,7 +65,6 @@ public class SearchProgram extends ListActivity {
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		db.close();
 		super.onDestroy();
 	}

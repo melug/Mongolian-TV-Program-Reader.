@@ -5,7 +5,6 @@ import com.shine.tvprogram.db.ProgramDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 public class DatabaseSync extends Thread {
 	Handler handler;
@@ -26,8 +25,7 @@ public class DatabaseSync extends Thread {
 		try {
 			db.syncProgram(data, handler);
 		} catch(Exception e) {
-			Log.e(tag, e.toString());
-			e.printStackTrace();
+			
 		}
         endb.putString("status", status);
         endmsg.setData(endb);

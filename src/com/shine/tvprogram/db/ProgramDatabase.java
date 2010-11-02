@@ -1,12 +1,10 @@
 package com.shine.tvprogram.db;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -216,10 +214,6 @@ public class ProgramDatabase
 			outStream.close();
 
 			return uri.toString();
-		} catch (ClientProtocolException e) {
-			Log.e(tag, e.toString());
-		} catch (IOException e) {
-			Log.e(tag, e.toString());
 		} catch (Exception e) {
 			Log.e(tag, e.toString());
 		}
