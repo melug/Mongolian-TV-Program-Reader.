@@ -1,12 +1,10 @@
 package com.shine.tvprogram.db;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -31,6 +29,7 @@ import android.util.Log;
 
 public class ProgramDatabase 
 {
+	//Энэ классыг статик байх хэрэгтэй юм шиг санагдаад байна.
     private static final String TAG = "DBAdapter";
     private static final String DATABASE_NAME = "tvprogram";
     private static final int DATABASE_VERSION = 1;
@@ -131,8 +130,13 @@ public class ProgramDatabase
     }
     
     public Cursor searchPrograms(String query) {
-    	Cursor cursor = db.query("programs", null, "program_name LIKE ?", new String[]{"%" + query + "%"}, 
-    			null, null, null);
+    	return searchPrograms(query, 60);
+    }
+    
+    public Cursor searchPrograms(String query, Integer limit) {
+    	Integer today = DateHelper.getTodayOfWeek();
+    	Cursor cursor = db.query("programs", null, "program_name LIKE ? AND day >= ?", 
+    			new String[]{"%" + query + "%", today.toString()}, null, null, "day, time_to_air, channel_id", limit.toString());
     	return cursor;
     }
     
@@ -210,15 +214,9 @@ public class ProgramDatabase
 			outStream.close();
 
 			return uri.toString();
-		} catch (ClientProtocolException e) {
-			Log.e(tag, e.toString());
-		} catch (IOException e) {
-			Log.e(tag, e.toString());
 		} catch (Exception e) {
 			Log.e(tag, e.toString());
 		}
-		String a = "22";
-		Log.i(tag, a);
     	return null;
     }
 }

@@ -18,13 +18,18 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.SimpleCursorTreeAdapter;
 import android.widget.Toast;
-import android.util.Log;
 
+//Үндсэн класс, програм эхлэх үед ачааллана.
 public class TvInfo extends Activity {
+	//Өгөгдлийг үзэгдэлтэй холбогч адаптер класс
 	SimpleCursorTreeAdapter programListCursorAdapter;
+	//Дэлгэрдэг үзэгдэл
 	ExpandableListView expandableView;
+	//Интернетээс өгөгдөл татагч процесс
 	ProgramDownloader downloaderTask;
+	//Өгөгдлийн сантай харьцах үйлдлийг хялбарчилсан класс
 	ProgramDatabase db;
+	//Өгөгдлийн сангаас авсан өгөгдлийг заагч
 	Cursor allChannelsCursor;
 	final String tag = "TvInfo";
 	@Override
@@ -65,10 +70,8 @@ public class TvInfo extends Activity {
 				}
 			};
 			expandableView.setAdapter(programListCursorAdapter);
-			//allChannels.close();
 		} catch(Exception e) {
-			e.printStackTrace();
-			Log.e(tag, e.toString());
+			alert("Өгөгдөл авах үед алдаа гарлаа!");
 		}
 	}
 
@@ -152,6 +155,7 @@ public class TvInfo extends Activity {
 		return true;
 	}
 
+	//Арын орчинд ажиллаж буй процессоос сигнал хүлээн авагч
 	final Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			Bundle b = msg.getData();
@@ -169,7 +173,7 @@ public class TvInfo extends Activity {
 				downloadProgress.setMessage("Татаж байна. " + progress + "кб");
 			} else if("saving".equals(status)) {
 				String channel = b.getString("channel");
-				downloadProgress.setMessage(channel + "-ийг татаж байна");
+				downloadProgress.setMessage(channel + "-ийг хадгалж байна");
 			} else if("saved".equals(status)) {
 				dismissDialog(DOWNLOAD_PROGRESS_DIALOG);
 				updatePrograms();
