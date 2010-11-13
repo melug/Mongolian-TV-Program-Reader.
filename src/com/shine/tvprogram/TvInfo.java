@@ -92,6 +92,7 @@ public class TvInfo extends Activity {
 			case DOWNLOAD_PROGRESS_DIALOG: {
 				downloadProgress = new ProgressDialog(TvInfo.this);
 				downloadProgress.setMessage("Татаж байна.");
+				downloadProgress.setCancelable(false);
 				return downloadProgress;
 			}
 		}
