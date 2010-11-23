@@ -99,7 +99,10 @@ public class TvInfo extends Activity {
 		fillPrograms(currentChannelId);
 	}
 	
-	void fillPrograms(long channelId) {
+	void fillPrograms(Long channelId) {
+		if(channelId == null) {
+			return;
+		}
 		if(programsCursor != null) {
 			programsCursor.close();
 		}
@@ -241,7 +244,7 @@ public class TvInfo extends Activity {
 		   
 		   long fromNow = (programTime - rightNow) / (1000 * 60);
 		   if (fromNow > 0) {
-			   alarmManager.set(AlarmManager.RTC_WAKEUP, /*programTime*/ rightNow + 1 * 1000, 
+			   alarmManager.set(AlarmManager.RTC_WAKEUP, programTime /*rightNow + 1 * 1000*/, 
 					   alarm);
 		   } else {
 			   alert("Уучлаарай, гараад өнгөрсөн нэвтрүүлэг байна :(");

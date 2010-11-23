@@ -4,6 +4,7 @@ import com.shine.tvprogram.db.ProgramDatabase;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,13 +30,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 		Notification notification = new Notification(R.drawable.icon, programName, when);
 		
-		CharSequence contentTitle = channelName + " сувгаар.";
-		CharSequence contentText = programName;
-		//PendingIntent contentIntent = PendingIntent.getActivity(context, 0, null, 0);
-		notification.setLatestEventInfo(context, contentTitle, contentText, null);
+		CharSequence contentTitle = programName;
+		CharSequence contentText = channelName + " сувгаар.";
+		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, null, 0);
+		notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
 		mNotificationManager.notify((int)(programId % Integer.MAX_VALUE), notification);
 		
 		programCursor.close();
+		channelCursor.close();
 		db.close();
 	}
 }
