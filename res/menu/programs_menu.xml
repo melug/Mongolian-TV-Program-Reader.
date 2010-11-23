@@ -14,4 +14,5 @@
 </item>
 <item android:id="@+id/download_program" android:title="@string/download" />
 <item android:id="@+id/search_program" android:title="@string/search" />
+<item android:id="@+id/favourite_programs" android:title="@string/favourite_programs" />
 </menu>

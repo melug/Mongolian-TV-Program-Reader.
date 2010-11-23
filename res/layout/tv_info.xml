@@ -3,9 +3,35 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
-  	<ExpandableListView
+  <RelativeLayout
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+  	<Gallery
+  	android:id="@+id/channel_list_view"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:layout_alignParentBottom="true"
+    android:background="#FFFFFF"
+  	>
+  	</Gallery>
+  	<LinearLayout
   		android:layout_width="fill_parent"
-  		android:layout_height="wrap_content"
-  		android:id="@+id/expandable_view">
-  	</ExpandableListView>
+  		android:layout_height="fill_parent"
+  		android:layout_above="@id/channel_list_view"
+  	>
+  	  <TextView
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="fill_parent"
+  	    android:text="@string/aboutus_long"
+  	    android:id="@+id/home_view"
+  	  >
+  	  </TextView>
+  	  <ListView
+  		android:layout_width="fill_parent"
+  		android:layout_height="fill_parent"
+  		android:id="@+id/program_list_view">
+  	  </ListView>
+  	</LinearLayout>
+  </RelativeLayout>
 </LinearLayout>

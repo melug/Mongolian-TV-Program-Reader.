@@ -18,8 +18,8 @@ public class SearchProgram extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		db = new ProgramDatabase(SearchProgram.this, getContentResolver());
-		db.open();
+		db = new ProgramDatabase(SearchProgram.this);
+		db.openAsRead();
 	    Intent intent = getIntent();
 	    
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -32,7 +32,7 @@ public class SearchProgram extends ListActivity {
 		Cursor programs = db.searchPrograms(query);
 		SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(SearchProgram.this, R.layout.search_entry
 				, programs, 
-				new String[]{"time_to_air", "program_name", "day", "channel_id"}, 
+				new String[]{ "time_to_air", "program_name", "day", "channel_id" }, 
 				new int[]{R.id.entry_time, R.id.entry_program, R.id.entry_day, R.id.entry_channel});
 		cursorAdapter.setViewBinder(new ViewBinder() {
 			@Override
