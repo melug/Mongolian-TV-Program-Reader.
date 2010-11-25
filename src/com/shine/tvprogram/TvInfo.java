@@ -47,6 +47,7 @@ public class TvInfo extends Activity {
 	private Integer selectedDay = currentDay = DateHelper.getTodayOfWeek();
 	private Long currentChannelId;
 	private Long selectedProgramId;
+	private boolean reloadedReminders = false;
 	/*
 	 * isDebug их хэрэгтэй хувьсагч шүү. хэрэглэсэн газруудыг нь хараарай.
 	 * Жижигхэн өөрчлөлт эд нарыг дебаг ашиглаж шалгах нь үнэхээр ядаргаатай.
@@ -64,7 +65,6 @@ public class TvInfo extends Activity {
 			db.openAsRead();
 			programListView = (ListView) findViewById(R.id.program_list_view);
 			channelListView = (Gallery) findViewById(R.id.channel_list_view);
-			this.
 			homeView = findViewById(R.id.home_view);
 			programListView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
@@ -89,14 +89,8 @@ public class TvInfo extends Activity {
 		} catch (SQLException e) {
 			if(TvInfo.isDebug) {
 				alert(e.toString());
-			} else {
-				alert("Яачив? :)");
 			}
 		}
-	}
-	
-	void fillPrograms() {
-		fillPrograms(currentChannelId);
 	}
 	
 	void fillPrograms(Long channelId) {
@@ -123,10 +117,13 @@ public class TvInfo extends Activity {
 				new String[] { "channel_name", "img_data" }, 
 				new int[] { R.id.channel_name, R.id.channel_icon }) {
 			public void bindView (View view, Context context, Cursor cursor) {
-				//Android's adapter class is not extensible enough.
-				//I wanted to set ViewBinder, but before ViewBinder is used 
-				//it tried to convert Blob data to String that throws some weird 
-				//exception. So that I overrided bindView.
+				/**
+				 * Андройдын адаптер классууд нь тийм ч сайн биш. Би зургаа
+				 * өгөгдлийн санд хадгалсан гэтэл адаптер нь ямар ч өгөгдлийн
+				 * тэмдэгт төрөл болгож хувиргахыг оролдоод байсан болохоор
+				 * bindView-ийг дахин тодорхойлж бичив. Хэрвээ онцын нарийн зүйлийн
+				 * шаардлагагүй бол ViewBinder классыг ашиглах хэрэгтэй.
+				 */
 				try {
 					Long channelId = cursor.getLong(cursor.getColumnIndex("_id"));
 					TextView channelNameView = (TextView)view.findViewById(R.id.channel_name);
@@ -152,7 +149,7 @@ public class TvInfo extends Activity {
 					if(TvInfo.isDebug) {
 						alert(e.toString());
 					} else {
-						alert("Алдаа гарчихлаа даа.");
+						alert("Алдаа гарлаа.");
 					}
 				}
 			}
@@ -194,11 +191,7 @@ public class TvInfo extends Activity {
 			       .setCancelable(false)
 			       .setPositiveButton("Тийм", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
-			        	   try {
-			        		   setReminder();
-			        	   } catch(Exception e) {
-			        		   alert(e.toString());
-			        	   }
+			        	   setReminder(selectedProgramId);
 			           }
 			       })
 			       .setNegativeButton("Үгүй", new DialogInterface.OnClickListener() {
@@ -212,10 +205,6 @@ public class TvInfo extends Activity {
 			
 		}
 		return super.onCreateDialog(id);
-	}
-	
-	public void setReminder() {
-		setReminder(selectedProgramId);
 	}
 	
 	public void setReminder(Long programId) {
@@ -320,7 +309,7 @@ public class TvInfo extends Activity {
 		}
 		if(day != -1) {
 			selectedDay = day;
-			fillPrograms();
+			fillPrograms(currentChannelId);
 		}
 		return true;
 	}

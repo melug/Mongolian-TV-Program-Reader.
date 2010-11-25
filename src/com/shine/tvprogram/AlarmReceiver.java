@@ -9,7 +9,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-
+/**
+ * Урьдчилж бэлтгэсэн сэрүүлэг нь энэхүү хүлээн авагчийг дуудах болно.
+ * Хүлээн авагчийг дуудахдаа түүнд программын дугаарыг дамжуулах
+ * хэрэгтэй.
+ * @author tulga
+ *
+ */
 public class AlarmReceiver extends BroadcastReceiver {
 
 	@Override
@@ -30,10 +36,12 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 		Notification notification = new Notification(R.drawable.icon, programName, when);
 		
-		CharSequence contentTitle = programName;
-		CharSequence contentText = channelName + " сувгаар.";
+		CharSequence contentTitle = channelName + " сувгаар.";
+		CharSequence contentText = programName;
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, null, 0);
+		
 		notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
+		notification.tickerText = "Дуртай нэвтрүүлэг тань эхэлж байна.";
 		mNotificationManager.notify((int)(programId % Integer.MAX_VALUE), notification);
 		
 		programCursor.close();

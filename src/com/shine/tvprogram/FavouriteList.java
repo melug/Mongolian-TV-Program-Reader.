@@ -28,16 +28,12 @@ public class FavouriteList extends Activity {
 	Long selectedProgramId;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		try {
-			super.onCreate(savedInstanceState);
-			setContentView(R.layout.favourite_programs);
-			db = new ProgramDatabase(this);
-			db.openAsRead();
-			favList = (ListView)findViewById(R.id.fav_list);
-			fillPrograms();
-		} catch(Exception e) {
-			alert(e.toString() + "\n" + e.getMessage());
-		}
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.favourite_programs);
+		db = new ProgramDatabase(this);
+		db.openAsRead();
+		favList = (ListView)findViewById(R.id.fav_list);
+		fillPrograms();
 	}
 
 	protected void fillPrograms() {
@@ -94,7 +90,7 @@ public class FavouriteList extends Activity {
 			       })
 			       .setNegativeButton("Үгүй", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
-			                dialog.cancel();
+			               dialog.cancel();
 			           }
 			       });
 				AlertDialog alert = builder.create();

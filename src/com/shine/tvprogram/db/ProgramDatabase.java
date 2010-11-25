@@ -154,6 +154,21 @@ public class ProgramDatabase
 		return mCursor;
     }
     
+    public Cursor getFavouriteProgramsNotReminded() {
+    	Integer today = DateHelper.getTodayOfWeek();
+    	Cursor mCursor = null;
+    	try {
+    	mCursor = db.query("programs", null, "is_reminded = ? AND day >= ?", new String[] { "1", today.toString() }
+    	, null, null, "day, time_to_air ASC");
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	if(mCursor != null) {
+			mCursor.moveToFirst();
+		}
+    	return mCursor;
+    }
+    
     public int setReminderOn(Long programId) {
     	return setReminder(programId, true);
     }

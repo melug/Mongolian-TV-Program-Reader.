@@ -22,10 +22,18 @@
 		</activity>
 		<receiver android:name=".AlarmReceiver">
 		</receiver>
+		<receiver android:name=".RebootReceiver">
+  			<intent-filter>
+    			<action android:name="android.intent.action.BOOT_COMPLETED" />
+    			<category android:name="android.intent.category.HOME" />
+  			</intent-filter>
+		</receiver>
 		<meta-data android:name="android.app.default_searchable"
                android:value=".SearchProgram" />
     </application> 
     <uses-permission
         android:name="android.permission.INTERNET" />
+    <uses-permission 
+    	android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-sdk android:minSdkVersion="3" />
 </manifest> 
