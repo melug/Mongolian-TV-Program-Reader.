@@ -3,6 +3,7 @@ package com.shine.tvprogram;
 import java.io.ByteArrayInputStream;
 
 import com.shine.tvprogram.db.ProgramDatabase;
+import com.shine.tvprogram.receivers.AlarmReceiver;
 import com.shine.tvprogram.threads.ContentUpdater;
 
 import android.app.Activity;
@@ -216,7 +217,6 @@ public class TvInfo extends Activity {
 		    * хамгийн их бүхэл тоонд үлдэгдэлтэй хувааж гаргаж авсан.
 		    * PendingIntent.id = TvProgram.id % Integer.MAX_VALUE
 		    */
-		   db.setReminderOn(programId);
 		   Intent favIntent = new Intent(TvInfo.this, AlarmReceiver.class);
 		   favIntent.putExtra("programId", programId);
 
@@ -232,12 +232,15 @@ public class TvInfo extends Activity {
 				   favProgramCursor.getString(favProgramCursor.getColumnIndex("time_to_air")));
 		   
 		   long fromNow = (programTime - rightNow) / (1000 * 60);
+		   
 		   if (fromNow > 0) {
+			   db.setReminderOn(programId);
 			   alarmManager.set(AlarmManager.RTC_WAKEUP, programTime /*rightNow + 1 * 1000*/, 
 					   alarm);
 		   } else {
 			   alert("Уучлаарай, гараад өнгөрсөн нэвтрүүлэг байна :(");
 		   }
+		   
 		   favProgramCursor.close();
 		   
 		   if(TvInfo.isDebug) {

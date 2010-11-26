@@ -1,5 +1,6 @@
-package com.shine.tvprogram;
+package com.shine.tvprogram.receivers;
 
+import com.shine.tvprogram.DateHelper;
 import com.shine.tvprogram.db.ProgramDatabase;
 
 import android.app.AlarmManager;
@@ -31,7 +32,7 @@ public class RebootReceiver extends BroadcastReceiver {
 		db.openAsRead();
 		Cursor favouritePrograms = db.getFavouriteProgramsNotReminded();
 		
-		while(favouritePrograms.isAfterLast()) {
+		while(!favouritePrograms.isAfterLast()) {
 			
 			Intent favIntent = new Intent(context, AlarmReceiver.class);
 			Long programId = favouritePrograms.getLong(
@@ -57,5 +58,6 @@ public class RebootReceiver extends BroadcastReceiver {
 		    favouritePrograms.moveToNext();
 		}
 		favouritePrograms.close();
+		db.close();
 	}
 }

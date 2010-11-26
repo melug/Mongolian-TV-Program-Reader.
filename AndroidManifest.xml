@@ -20,9 +20,9 @@
 		</activity>
 		<activity android:name=".FavouriteList">
 		</activity>
-		<receiver android:name=".AlarmReceiver">
+		<receiver android:name=".receivers.AlarmReceiver">
 		</receiver>
-		<receiver android:name=".RebootReceiver">
+		<receiver android:name=".receivers.RebootReceiver">
   			<intent-filter>
     			<action android:name="android.intent.action.BOOT_COMPLETED" />
     			<category android:name="android.intent.category.HOME" />

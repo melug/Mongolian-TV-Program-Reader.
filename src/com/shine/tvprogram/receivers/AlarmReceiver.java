@@ -1,5 +1,7 @@
-package com.shine.tvprogram;
+package com.shine.tvprogram.receivers;
 
+import com.shine.tvprogram.R;
+import com.shine.tvprogram.R.drawable;
 import com.shine.tvprogram.db.ProgramDatabase;
 
 import android.app.Notification;

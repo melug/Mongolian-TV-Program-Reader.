@@ -2,23 +2,29 @@ package com.shine.tvprogram;
 
 import java.util.Calendar;
 
+/**
+ * Грегорийн календарыг хараал ид. Еэээ!!
+ * @author tulga
+ *
+ */
 public class DateHelper {
 	static String dayLocalization[] = new String[]{
 			"Даваа","Мягмар","Лхагва","Пүрэв","Баасан","Бямба","Ням",
 	};
+	
 	public static int getTodayOfWeek() {
-		Calendar this_moment = Calendar.getInstance();
-    	int today = this_moment.get(Calendar.DAY_OF_WEEK), exact_day = 0;
+		Calendar thisMoment = Calendar.getInstance();
+    	int today = thisMoment.get(Calendar.DAY_OF_WEEK), exactDay = 0;
     	switch(today) {
-    		case Calendar.MONDAY: 		{ exact_day = 1; break; }
-    		case Calendar.TUESDAY: 		{ exact_day = 2; break; }
-    		case Calendar.WEDNESDAY: 	{ exact_day = 3; break; }
-    		case Calendar.THURSDAY: 	{ exact_day = 4; break; }
-    		case Calendar.FRIDAY: 		{ exact_day = 5; break; }
-    		case Calendar.SATURDAY: 	{ exact_day = 6; break; }
-    		case Calendar.SUNDAY: 		{ exact_day = 7; break; }
+    		case Calendar.MONDAY: 		{ exactDay = 1; break; }
+    		case Calendar.TUESDAY: 		{ exactDay = 2; break; }
+    		case Calendar.WEDNESDAY: 	{ exactDay = 3; break; }
+    		case Calendar.THURSDAY: 	{ exactDay = 4; break; }
+    		case Calendar.FRIDAY: 		{ exactDay = 5; break; }
+    		case Calendar.SATURDAY: 	{ exactDay = 6; break; }
+    		case Calendar.SUNDAY: 		{ exactDay = 7; break; }
     	}
-    	return exact_day;
+    	return exactDay;
 	}
 	
 	public static String getDayName(int day) {
@@ -26,19 +32,54 @@ public class DateHelper {
 	}
 	
 	public static String getCurrentTime() {
-		Calendar this_moment = Calendar.getInstance();
-		String time = leftPadding(this_moment.get(Calendar.HOUR_OF_DAY) + "", 2) + "." + 
-			leftPadding(this_moment.get(Calendar.MINUTE) + "", 2);
+		Calendar thisMoment = Calendar.getInstance();
+		String time = leftPadding(thisMoment.get(Calendar.HOUR_OF_DAY) + "", 2) + "." + 
+			leftPadding(thisMoment.get(Calendar.MINUTE) + "", 2);
 		return time;
 	}
 	
 	public static long getTimeOfProgram(Integer day, String time) {
-		Calendar this_moment = Calendar.getInstance();
-		this_moment.set(Calendar.DAY_OF_WEEK, day);
+		Calendar thisMoment = Calendar.getInstance();
+		thisMoment.set(Calendar.DAY_OF_WEEK, reverseDayOfWeek(day));
 		String[] timeParts = time.split("\\.", 2);
-		this_moment.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeParts[0]));
-		this_moment.set(Calendar.MINUTE, Integer.parseInt(timeParts[1]));
-		return this_moment.getTimeInMillis();
+		thisMoment.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeParts[0]));
+		thisMoment.set(Calendar.MINUTE, Integer.parseInt(timeParts[1]));
+		return thisMoment.getTimeInMillis();
+	}
+	
+	private static Integer reverseDayOfWeek(Integer day) {
+		Integer result = null;
+		switch(day) {
+			case 1 : {
+				result = Calendar.MONDAY;
+				break;
+			}
+			case 2 : {
+				result = Calendar.TUESDAY;
+				break;
+			}
+			case 3 : {
+				result = Calendar.WEDNESDAY;
+				break;
+			}
+			case 4 : {
+				result = Calendar.THURSDAY;
+				break;
+			}
+			case 5 : {
+				result = Calendar.FRIDAY;
+				break;
+			}
+			case 6 : {
+				result = Calendar.SATURDAY;
+				break;
+			}
+			case 7 : {
+				result = Calendar.SUNDAY;
+				break;
+			}
+		}
+		return result;
 	}
 	
 	private static String leftPadding(String str, int size) {
