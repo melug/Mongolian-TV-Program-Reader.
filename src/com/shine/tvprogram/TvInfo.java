@@ -6,6 +6,7 @@ import com.shine.tvprogram.db.ProgramDatabase;
 import com.shine.tvprogram.receivers.AlarmReceiver;
 import com.shine.tvprogram.threads.ContentUpdater;
 
+import android.R.anim;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -55,12 +56,14 @@ public class TvInfo extends Activity {
 	 * Цаг үрсэн ажил тиймээс энэ хувьсагчийн утгыг шалгаад Toast message явуулах
 	 * хэрэгтэй. Яг түгээх үедээ isDebug = false; болгоорой.
 	 */
-	static final boolean isDebug = true;
+	static final boolean isDebug = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tv_info);
+		
+		
 		try {
 			db = new ProgramDatabase(TvInfo.this);
 			db.openAsRead();
@@ -203,9 +206,19 @@ public class TvInfo extends Activity {
 				AlertDialog alert = builder.create();
 				return alert;
 			}
-			
 		}
 		return super.onCreateDialog(id);
+	}
+	
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		// TODO Auto-generated method stub
+		switch(id) {
+			case DOWNLOAD_PROGRESS_DIALOG: {
+				((ProgressDialog)dialog).setMessage("Татаж байна.");
+				break;
+			}
+		}
 	}
 	
 	public void setReminder(Long programId) {
@@ -238,7 +251,7 @@ public class TvInfo extends Activity {
 			   alarmManager.set(AlarmManager.RTC_WAKEUP, programTime /*rightNow + 1 * 1000*/, 
 					   alarm);
 		   } else {
-			   alert("Уучлаарай, гараад өнгөрсөн нэвтрүүлэг байна :(");
+			   alert("Уучлаарай, гараад өнгөрсөн нэвтрүүлэг байна :( Сэрүүлэг тавьж чадахгүй нь.");
 		   }
 		   
 		   favProgramCursor.close();

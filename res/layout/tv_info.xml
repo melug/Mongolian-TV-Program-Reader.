@@ -20,13 +20,22 @@
   		android:layout_height="fill_parent"
   		android:layout_above="@id/channel_list_view"
   	>
-  	  <TextView
+  	  <LinearLayout
+  	    android:id="@+id/home_view"
   	    android:layout_width="fill_parent"
   	    android:layout_height="fill_parent"
-  	    android:text="@string/aboutus_long"
-  	    android:id="@+id/home_view"
+  	    android:orientation="vertical"
   	  >
-  	  </TextView>
+	  	<TextView
+	  	  android:layout_width="fill_parent"
+	  	  android:layout_height="fill_parent"
+	  	  android:text="@string/help"
+	  	  android:gravity="center_horizontal"
+	  	  android:textSize="20sp"
+	  	  android:layout_marginTop="30px"
+	  	>
+  	  	</TextView>
+  	  </LinearLayout>
   	  <ListView
   		android:layout_width="fill_parent"
   		android:layout_height="fill_parent"

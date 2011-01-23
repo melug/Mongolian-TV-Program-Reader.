@@ -5,7 +5,7 @@
     <string name="download">Мэдээг шинэчлэх</string>
     <string name="tomorrow">Маргааш</string>
     <string name="yesterday">Өчигдөр</string>
-    <string name="aboutus_long">Сайн уу.</string>
+    <string name="aboutus_long">Тусламж: menu дээр дарна уу. Хөгжилтэй байгаарай :)</string>
     <string name="monday">Даваа</string>
     <string name="tuesday">Мягмар</string>
     <string name="wednesday">Лхагва</string>
@@ -20,4 +20,6 @@
     <string name="search">Хайх</string>
     <string name="rightnow">Яг одоо:</string>
     <string name="favourite_programs">Миний дуртай</string>
+<string name="help">Тусламж: menu дээр дарна уу</string>
+<string name="home_text">Хөгжилтэй байгаарай :)</string>
 </resources>

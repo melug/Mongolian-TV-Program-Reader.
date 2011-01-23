@@ -65,6 +65,8 @@ public final class R {
         public static final int favourite_programs=0x7f050013;
         public static final int friday=0x7f05000a;
         public static final int hello=0x7f050000;
+        public static final int help=0x7f050014;
+        public static final int home_text=0x7f050015;
         public static final int monday=0x7f050006;
         public static final int rightnow=0x7f050012;
         public static final int saturday=0x7f05000b;

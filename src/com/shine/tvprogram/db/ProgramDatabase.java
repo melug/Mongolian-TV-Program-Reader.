@@ -26,7 +26,7 @@ public class ProgramDatabase
 {
     private static final String TAG = "DBAdapter";
     private static final String DATABASE_NAME = "tvprogram";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_CREATE_CHANNELS = "create table channels (_id integer primary key autoincrement, img_data blob null, channel_name text not null);";
     private static final String DATABASE_CREATE_PROGRAMS = "create table programs (_id integer primary key autoincrement, channel_id integer, day integer, program_name text not null, time_to_air text not null, is_reminded integer default 0);";
     private final Context context; 
